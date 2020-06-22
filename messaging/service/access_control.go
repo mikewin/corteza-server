@@ -16,14 +16,10 @@ type (
 	}
 
 	accessControlPermissionServicer interface {
-		Can(context.Context, permissions.Resource, permissions.Operation, ...permissions.CheckAccessFunc) bool
+		Can(context.Context, permissions.Resourcable, permissions.Operation, ...permissions.CheckAccessFunc) bool
 		Grant(context.Context, permissions.Whitelist, ...*permissions.Rule) error
 		FindRulesByRoleID(roleID uint64) (rr permissions.RuleSet)
 		ResourceFilter(context.Context, permissions.Resource, permissions.Operation, permissions.Access) *permissions.ResourceFilter
-	}
-
-	permissionResource interface {
-		PermissionResource() permissions.Resource
 	}
 )
 
@@ -208,8 +204,8 @@ func (svc accessControl) isChannelOwnerFallback(ctx context.Context, ch *types.C
 	}
 }
 
-func (svc accessControl) can(ctx context.Context, res permissionResource, op permissions.Operation, ff ...permissions.CheckAccessFunc) bool {
-	return svc.permissions.Can(ctx, res.PermissionResource(), op, ff...)
+func (svc accessControl) can(ctx context.Context, res permissions.Resourcable, op permissions.Operation, ff ...permissions.CheckAccessFunc) bool {
+	return svc.permissions.Can(ctx, res, op, ff...)
 }
 
 func (svc accessControl) Grant(ctx context.Context, rr ...*permissions.Rule) error {

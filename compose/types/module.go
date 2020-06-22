@@ -45,6 +45,10 @@ func (m Module) PermissionResource() permissions.Resource {
 	return ModulePermissionResource.AppendID(m.ID)
 }
 
+func (m Module) DynamicRoles(userID uint64) []uint64 {
+	return nil
+}
+
 // FindByHandle finds module by it's handle
 func (set ModuleSet) FindByHandle(handle string) *Module {
 	for i := range set {

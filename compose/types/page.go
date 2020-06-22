@@ -74,6 +74,10 @@ func (p Page) PermissionResource() permissions.Resource {
 	return PagePermissionResource.AppendID(p.ID)
 }
 
+func (p Page) DynamicRoles(userID uint64) []uint64 {
+	return nil
+}
+
 // FindByHandle finds page by it's handle
 func (set PageSet) FindByHandle(handle string) *Page {
 	for i := range set {

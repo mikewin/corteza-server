@@ -48,6 +48,10 @@ func (n Namespace) PermissionResource() permissions.Resource {
 	return NamespacePermissionResource.AppendID(n.ID)
 }
 
+func (n Namespace) DynamicRoles(userID uint64) []uint64 {
+	return nil
+}
+
 // FindByHandle finds namespace by it's handle/slug
 func (set NamespaceSet) FindByHandle(handle string) *Namespace {
 	for i := range set {

@@ -17,7 +17,7 @@ type (
 	}
 
 	accessControlPermissionServicer interface {
-		Can(context.Context, permissions.Resource, permissions.Operation, ...permissions.CheckAccessFunc) bool
+		Can(context.Context, permissions.Resourcable, permissions.Operation, ...permissions.CheckAccessFunc) bool
 		Grant(context.Context, permissions.Whitelist, ...*permissions.Rule) error
 		FindRulesByRoleID(roleID uint64) (rr permissions.RuleSet)
 		ResourceFilter(context.Context, permissions.Resource, permissions.Operation, permissions.Access) *permissions.ResourceFilter
@@ -179,7 +179,7 @@ func (svc accessControl) CanUnmaskName(ctx context.Context, u *types.User) bool 
 	return svc.can(ctx, u, "unmask.name")
 }
 
-func (svc accessControl) can(ctx context.Context, res permissionResource, op permissions.Operation, ff ...permissions.CheckAccessFunc) bool {
+func (svc accessControl) can(ctx context.Context, res permissions.Resourcable, op permissions.Operation, ff ...permissions.CheckAccessFunc) bool {
 	return svc.permissions.Can(ctx, res.PermissionResource(), op, ff...)
 }
 

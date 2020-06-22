@@ -61,6 +61,10 @@ func (c Chart) PermissionResource() permissions.Resource {
 	return ChartPermissionResource.AppendID(c.ID)
 }
 
+func (c Chart) DynamicRoles(userID uint64) []uint64 {
+	return nil
+}
+
 // FindByHandle finds chart by it's handle
 func (set ChartSet) FindByHandle(handle string) *Chart {
 	for i := range set {

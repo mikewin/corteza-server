@@ -18,7 +18,7 @@ type (
 	}
 )
 
-func (ServiceAllowAll) Can(ctx context.Context, res Resource, op Operation, ff ...CheckAccessFunc) bool {
+func (ServiceAllowAll) Can(ctx context.Context, res Resourcable, op Operation, ff ...CheckAccessFunc) bool {
 	return true
 }
 
@@ -38,7 +38,7 @@ func (ServiceAllowAll) ResourceFilter(context.Context, Resource, Operation, Acce
 	return &ResourceFilter{superuser: true}
 }
 
-func (ServiceDenyAll) Can(ctx context.Context, res Resource, op Operation, ff ...CheckAccessFunc) bool {
+func (ServiceDenyAll) Can(ctx context.Context, res Resourcable, op Operation, ff ...CheckAccessFunc) bool {
 	return false
 }
 

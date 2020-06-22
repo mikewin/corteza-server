@@ -26,6 +26,11 @@ type (
 		repository *repository
 		dbTable    string
 	}
+
+	Resourcable interface {
+		PermissionResource() Resource
+		DynamicRoles(i uint64) []uint64
+	}
 )
 
 const (
@@ -59,7 +64,7 @@ func Service(ctx context.Context, logger *zap.Logger, db *factory.DB, tbl string
 // System user is always allowed to do everything
 //
 // When not explicitly allowed through rules or fallbacks, function will return FALSE.
-func (svc service) Can(ctx context.Context, res Resource, op Operation, ff ...CheckAccessFunc) bool {
+func (svc service) Can(ctx context.Context, res Resourcable, op Operation, ff ...CheckAccessFunc) bool {
 	{
 		// @todo remove this ASAP
 		//       for now, we need it because of complex init/setup relations under system
@@ -75,9 +80,14 @@ func (svc service) Can(ctx context.Context, res Resource, op Operation, ff ...Ch
 		return true
 	}
 
-	var roles = u.Roles()
+	// @todo replace context with list of roles directly
+	var roles = append(
+		u.Roles(),
+		res.DynamicRoles(u.Identity())...,
+	)
+
 	// Checking rules
-	var v = svc.Check(res, op, roles...)
+	var v = svc.Check(res.PermissionResource(), op, roles...)
 	if v != Inherit {
 		return v == Allow
 	}
