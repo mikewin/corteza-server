@@ -46,6 +46,10 @@ type (
 	}
 )
 
+func NewSuperuserFilter() *ResourceFilter {
+	return &ResourceFilter{superuser: true}
+}
+
 func (rf *ResourceFilter) Build(pkColName string) *ResourceFilter {
 	rf.pkColName = pkColName
 	return rf

@@ -9,7 +9,6 @@ import (
 	"github.com/titpetric/factory"
 	"go.uber.org/zap"
 
-	"github.com/cortezaproject/corteza-server/pkg/auth"
 	"github.com/cortezaproject/corteza-server/pkg/sentry"
 )
 
@@ -25,11 +24,6 @@ type (
 
 		repository *repository
 		dbTable    string
-	}
-
-	Resourcable interface {
-		PermissionResource() Resource
-		DynamicRoles(i uint64) []uint64
 	}
 )
 
@@ -64,19 +58,7 @@ func Service(ctx context.Context, logger *zap.Logger, db *factory.DB, tbl string
 // System user is always allowed to do everything
 //
 // When not explicitly allowed through rules or fallbacks, function will return FALSE.
-func (svc service) Can(ctx context.Context, res Resource, op Operation, ff ...CheckAccessFunc) bool {
-	u := auth.GetIdentityFromContext(ctx)
-
-	if auth.IsSuperUser(u) {
-		return true
-	}
-
-	// @todo replace context with list of roles directly
-	var roles = append(
-		u.Roles(),
-		res.DynamicRoles(u.Identity())...,
-	)
-
+func (svc service) Can(roles []uint64, res Resource, op Operation, ff ...CheckAccessFunc) bool {
 	// Checking rules
 	var v = svc.Check(res.PermissionResource(), op, roles...)
 	if v != Inherit {
@@ -194,15 +176,9 @@ func (svc *service) Reload(ctx context.Context) {
 // ResourceFilter is repository helper that we use to filter resources directly in the database
 //
 // See ResourceFilter struct documentation for details
-func (svc *service) ResourceFilter(ctx context.Context, r Resource, op Operation, fallback Access) *ResourceFilter {
-	u := auth.GetIdentityFromContext(ctx)
-
-	if auth.IsSuperUser(u) {
-		return &ResourceFilter{superuser: true}
-	}
-
+func (svc *service) ResourceFilter(roles []uint64, r Resource, op Operation, fallback Access) *ResourceFilter {
 	return &ResourceFilter{
-		roles:     u.Roles(),
+		roles:     roles,
 		resource:  r,
 		operation: op,
 		dbTable:   svc.dbTable,

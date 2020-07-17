@@ -16,7 +16,10 @@ type (
 		repository    Repository
 		accessControl accessController
 		logger        *zap.Logger
-		current       interface{}
+
+		// Holds reference to the "current" settings that
+		// are used by the services
+		current interface{}
 	}
 
 	Service interface {
@@ -59,6 +62,10 @@ func (svc service) FindByPrefix(ctx context.Context, pp ...string) (ValueSet, er
 		return nil, ErrNoReadPermission
 	}
 
+	return svc.findByPrefix(ctx, pp...)
+}
+
+func (svc service) findByPrefix(ctx context.Context, pp ...string) (ValueSet, error) {
 	var (
 		f = Filter{
 			Prefix: strings.Join(pp, "."),
@@ -77,7 +84,7 @@ func (svc service) Get(ctx context.Context, name string, ownedBy uint64) (out *V
 }
 
 func (svc service) UpdateCurrent(ctx context.Context) error {
-	if vv, err := svc.FindByPrefix(ctx); err != nil {
+	if vv, err := svc.findByPrefix(ctx); err != nil {
 		return err
 	} else {
 		return svc.updateCurrent(ctx, vv)

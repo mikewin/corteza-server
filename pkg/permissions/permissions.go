@@ -24,26 +24,37 @@ type (
 )
 
 const (
-	// Hardcoded Role ID for everyone
+	// EveryoneRoleID -- everyone
 	EveryoneRoleID uint64 = 1
 
-	// Hardcoded ID for Admin role
+	// AdminsRoleID - admins
 	AdminsRoleID uint64 = 2
 
-	// OwnersDynamicRoleID role is dynamically assigned when current user is owner of the resource
+	// OwnersDynamicRoleID for Owners role is dynamically assigned
+	// when current user is owner of the resource
 	OwnersDynamicRoleID uint64 = 10000
 
-	// CreatorsDynamicRoleID role is dynamically assigned when current user created the resource
+	// CreatorsDynamicRoleID for Creators role is dynamically assigned
+	// when current user created the resource
 	CreatorsDynamicRoleID uint64 = 10010
 
-	// UpdatorsDynamicRoleID role is dynamically assigned when current user updated the resource
+	// UpdatersDynamicRoleID for Updaters role is dynamically assigned
+	// when current user updated the resource
 	UpdatersDynamicRoleID uint64 = 10011
 
-	// DeletersDynamicRoleID role is dynamically assigned when current user deleted the resource
+	// DeletersDynamicRoleID for Deleters role is dynamically assigned
+	// when current user deleted the resource
 	DeletersDynamicRoleID uint64 = 10012
 
-	// MembersDynamicRoleID role is dynamically assigned when current user member of the resource
+	// MembersDynamicRoleID for Members role is dynamically assigned
+	// when current user member of the resource
+	// Can be used by resources that have members
 	MembersDynamicRoleID uint64 = 10020
+
+	// AssigneesDynamicRoleID for Assignees role is dynamically assigned
+	// when current user member of the resource
+	// Can be used by resources that have assignees
+	AssigneesDynamicRoleID uint64 = 10021
 )
 
 func (op Operation) String() string {
@@ -138,6 +149,10 @@ func (wl Whitelist) Flatten() []whitelistFlatten {
 // DynamicRoles is a utility function that compares
 // given u with each odd element in cc
 // and returns even element on a match
+//
+// In practice, pass userID as first argument and
+// set of userID-roleID pairs. Function returns
+// all roles that are paired with the same user
 func DynamicRoles(u uint64, cc ...uint64) (rr []uint64) {
 	var l = len(cc)
 
