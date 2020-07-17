@@ -64,16 +64,7 @@ func Service(ctx context.Context, logger *zap.Logger, db *factory.DB, tbl string
 // System user is always allowed to do everything
 //
 // When not explicitly allowed through rules or fallbacks, function will return FALSE.
-func (svc service) Can(ctx context.Context, res Resourcable, op Operation, ff ...CheckAccessFunc) bool {
-	{
-		// @todo remove this ASAP
-		//       for now, we need it because of complex init/setup relations under system
-		ctxTestingVal := ctx.Value("testing")
-		if t, ok := ctxTestingVal.(bool); ok && t {
-			return true
-		}
-	}
-
+func (svc service) Can(ctx context.Context, res Resource, op Operation, ff ...CheckAccessFunc) bool {
 	u := auth.GetIdentityFromContext(ctx)
 
 	if auth.IsSuperUser(u) {
