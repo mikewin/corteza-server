@@ -1,6 +1,7 @@
 package options
 
 import (
+	"strings"
 	"time"
 )
 
@@ -19,7 +20,7 @@ func DB(pfix string) (o *DBOpt) {
 	const maxTries = 100
 
 	o = &DBOpt{
-		DSN:      "corteza:corteza@tcp(db:3306)/corteza?collation=utf8mb4_general_ci",
+		DSN:      "mysql://corteza:corteza@tcp(db:3306)/corteza?collation=utf8mb4_general_ci",
 		Logger:   false,
 		MaxTries: maxTries,
 		Delay:    delay,
@@ -27,6 +28,11 @@ func DB(pfix string) (o *DBOpt) {
 	}
 
 	fill(o, pfix)
+
+	if !strings.Contains(o.DSN, "://") {
+		// Make sure DSN is compatible with new requirements
+		o.DSN = "mysql://" + o.DSN
+	}
 
 	return
 }

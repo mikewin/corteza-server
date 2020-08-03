@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"regexp"
+	"strings"
 	"time"
 
 	"github.com/pkg/errors"
@@ -25,6 +26,11 @@ func TryToConnect(ctx context.Context, log *zap.Logger, opt options.DBOpt) (db *
 	}
 
 	name := "default"
+
+	// Trim off the schema, as titpetric/factory does not support it
+	if strings.HasPrefix(opt.DSN, "mysql://") {
+		opt.DSN = opt.DSN[8:]
+	}
 
 	factory.Database.Add(name, factory.DatabaseCredential{DSN: opt.DSN, DriverName: "mysql"})
 
