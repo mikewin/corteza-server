@@ -46,6 +46,7 @@ require (
 	github.com/schollz/progressbar/v2 v2.15.0
 	github.com/simukti/sqldb-logger v0.0.0-20200602044015-843152fd150e // indirect
 	github.com/smartystreets/goconvey v1.6.4 // indirect
+	github.com/sony/sonyflake v0.0.0-20181109022403-6d5bd6181009
 	github.com/spf13/afero v1.2.2
 	github.com/spf13/cast v1.3.0
 	github.com/spf13/cobra v0.0.3
