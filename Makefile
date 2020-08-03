@@ -179,13 +179,6 @@ test.pkg:
 
 test: test.unit
 
-# Outputs cross-package imports that should not be there.
-test.cross-dep:
-	@ grep -rE "github.com/cortezaproject/corteza-server/(compose|messaging)/" system || exit 0
-	@ grep -rE "github.com/cortezaproject/corteza-server/(system|messaging)/" compose || exit 0
-	@ grep -rE "github.com/cortezaproject/corteza-server/(system|compose)/" messaging || exit 0
-	@ grep -rE "github.com/cortezaproject/corteza-server/(system|compose|messaging)/" pkg || exit 0
-
 vet:
 	$(GO) vet ./...
 
