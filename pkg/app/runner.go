@@ -12,7 +12,6 @@ import (
 	"github.com/cortezaproject/corteza-server/pkg/actionlog"
 	"github.com/cortezaproject/corteza-server/pkg/api"
 	"github.com/cortezaproject/corteza-server/pkg/cli"
-	grpcWrap "github.com/cortezaproject/corteza-server/pkg/grpc"
 )
 
 type (
@@ -82,11 +81,6 @@ type (
 	apiRouteMounter interface {
 		// MountApiRoutes mounts all routes
 		MountApiRoutes(router chi.Router)
-	}
-
-	grpcRegistrator interface {
-		// RegisterGrpcServices registers all gRPC services that are needed
-		RegisterGrpcServices(server *grpc.Server)
 	}
 )
 
@@ -212,25 +206,6 @@ func (r *runner) setupHttpApi() {
 	}
 }
 
-func (r *runner) setupGRPCServices() {
-
-	r.grpcServer = grpcWrap.New(r.log, r.opt.GRPCServer)
-
-	var hasServices bool
-
-	// Register GRPC services
-	for _, part := range r.parts {
-		if reg, is := part.(grpcRegistrator); is {
-			r.grpcServer.RegisterServices(reg.RegisterGrpcServices)
-			hasServices = true
-		}
-	}
-
-	if !hasServices {
-		r.grpcServer = nil
-	}
-}
-
 // serve starts all servers (HTTP API, GRPC)
 func (r *runner) serve(ctx context.Context) (err error) {
 	if err = r.Provision(ctx); err != nil {
@@ -238,7 +213,6 @@ func (r *runner) serve(ctx context.Context) (err error) {
 	}
 
 	r.setupHttpApi()
-	r.setupGRPCServices()
 
 	wg := &sync.WaitGroup{}
 
@@ -250,14 +224,13 @@ func (r *runner) serve(ctx context.Context) (err error) {
 		}(ctx)
 	}
 
-	if r.grpcServer != nil {
-		wg.Add(1)
-		go func(ctx context.Context) {
-			r.grpcServer.Serve(actionlog.RequestOriginToContext(ctx, actionlog.RequestOrigin_API_GRPC))
-			wg.Done()
-		}(ctx)
-
-	}
+	//if r.grpcServer != nil {
+	//	wg.Add(1)
+	//	go func(ctx context.Context) {
+	//		r.grpcServer.Serve(actionlog.RequestOriginToContext(ctx, actionlog.RequestOrigin_API_GRPC))
+	//		wg.Done()
+	//	}(ctx)
+	//}
 
 	// Wait for all servers to be done
 	wg.Wait()

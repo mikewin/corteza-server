@@ -8,7 +8,6 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
-	"google.golang.org/grpc"
 	"strings"
 
 	"github.com/cortezaproject/corteza-server/compose"
@@ -144,10 +143,6 @@ func (monolith *App) MountApiRoutes(r chi.Router) {
 	if webappEnabled {
 		r.Route("/"+webappBaseUrl, webapp.MakeWebappServer(monolith.Opts.HTTPServer))
 	}
-}
-
-func (monolith *App) RegisterGrpcServices(srv *grpc.Server) {
-	monolith.System.RegisterGrpcServices(srv)
 }
 
 // RegisterCliCommands on monolith will wrapp all commands

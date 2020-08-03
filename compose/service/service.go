@@ -30,9 +30,8 @@ type (
 	}
 
 	Config struct {
-		ActionLog        options.ActionLogOpt
-		Storage          options.StorageOpt
-		GRPCClientSystem options.GRPCServerOpt
+		ActionLog options.ActionLogOpt
+		Storage   options.StorageOpt
 	}
 
 	eventDispatcher interface {
@@ -161,15 +160,6 @@ func Initialize(ctx context.Context, log *zap.Logger, c Config) (err error) {
 	DefaultNamespace = Namespace()
 	DefaultModule = Module()
 
-	//{
-	//	systemClientConn, err := NewSystemGRPCClient(ctx, c.GRPCClientSystem, DefaultLogger)
-	//	if err != nil {
-	//		return err
-	//	}
-	//
-	//	DefaultSystemUser = SystemUser(systemProto.NewUsersClient(systemClientConn))
-	//	DefaultSystemRole = SystemRole(systemProto.NewRolesClient(systemClientConn))
-	//}
 	DefaultSystemUser = systemService.DefaultUser
 
 	DefaultImportSession = ImportSession()

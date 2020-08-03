@@ -11,8 +11,6 @@ import (
 	"github.com/cortezaproject/corteza-server/pkg/scheduler"
 	"github.com/cortezaproject/corteza-server/system/auth/external"
 	"github.com/cortezaproject/corteza-server/system/commands"
-	systemGRPC "github.com/cortezaproject/corteza-server/system/grpc"
-	"github.com/cortezaproject/corteza-server/system/proto"
 	"github.com/cortezaproject/corteza-server/system/rest"
 	"github.com/cortezaproject/corteza-server/system/service"
 	"github.com/cortezaproject/corteza-server/system/service/event"
@@ -20,7 +18,6 @@ import (
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
-	"google.golang.org/grpc"
 )
 
 type (
@@ -120,19 +117,6 @@ func (app *App) Provision(ctx context.Context) (err error) {
 
 func (app *App) MountApiRoutes(r chi.Router) {
 	rest.MountRoutes(r)
-}
-
-func (app *App) RegisterGrpcServices(server *grpc.Server) {
-	proto.RegisterUsersServer(server, systemGRPC.NewUserService(
-		service.DefaultUser,
-		service.DefaultAuth,
-		auth.DefaultJwtHandler,
-		service.DefaultAccessControl,
-	))
-
-	proto.RegisterRolesServer(server, systemGRPC.NewRoleService(
-		service.DefaultRole,
-	))
 }
 
 func (app *App) RegisterCliCommands(p *cobra.Command) {

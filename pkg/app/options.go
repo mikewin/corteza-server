@@ -19,7 +19,6 @@ type (
 		Monitor    options.MonitorOpt
 		WaitFor    options.WaitForOpt
 		HTTPServer options.HTTPServerOpt
-		GRPCServer options.GRPCServerOpt
 		Websocket  options.WebsocketOpt
 	}
 )
@@ -44,7 +43,6 @@ func NewOptions(prefix ...string) *Options {
 		Monitor:    *options.Monitor(p),
 		WaitFor:    *options.WaitFor(p),
 		HTTPServer: *options.HTTP(p),
-		GRPCServer: *options.GRPCServer(p),
 		Websocket:  *options.Websocket(p),
 	}
 }

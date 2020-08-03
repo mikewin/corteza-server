@@ -30,9 +30,8 @@ type (
 	}
 
 	Config struct {
-		ActionLog        options.ActionLogOpt
-		Storage          options.StorageOpt
-		GRPCClientSystem options.GRPCServerOpt
+		ActionLog options.ActionLogOpt
+		Storage   options.StorageOpt
 	}
 
 	permitChecker interface {
