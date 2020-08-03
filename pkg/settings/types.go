@@ -2,6 +2,7 @@ package settings
 
 import (
 	"encoding/json"
+	"github.com/cortezaproject/corteza-server/pkg/rh"
 	"strings"
 	"time"
 
@@ -24,8 +25,8 @@ type (
 	Filter struct {
 		Prefix  string `json:"prefix"`
 		OwnedBy uint64 `json:"ownedBy"`
-		Page    uint64 `json:"page"`
-		PerPage uint64 `json:"perPage"`
+
+		rh.PageFilter
 	}
 
 	KV map[string]types.JSONText

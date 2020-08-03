@@ -71,11 +71,11 @@ func (r *repository) Find(f Filter) (ss ValueSet, err error) {
 	}
 
 	if f.Page > 0 {
-		lookup = lookup.Offset(f.PerPage * f.Page)
+		lookup = lookup.Offset(uint64(f.PerPage * f.Page))
 	}
 
 	if f.PerPage > 0 {
-		lookup = lookup.Limit(f.PerPage)
+		lookup = lookup.Limit(uint64(f.PerPage))
 	}
 
 	if query, args, err := lookup.ToSql(); err != nil {

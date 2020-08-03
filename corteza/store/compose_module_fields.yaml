@@ -1,0 +1,28 @@
+import:
+  - github.com/cortezaproject/corteza-server/compose/types
+
+types:
+  type: types.ModuleField
+
+fields:
+  - { field: ModuleID }
+  - { field: Place,        type: int }
+  - { field: Kind }
+  - { field: Name,         isPrimaryKey: true }
+  - { field: Label  }
+  - { field: Options,      type: "types.ModuleFieldOptions" }
+  - { field: Private,      type: bool }
+  - { field: Required,     type: bool }
+  - { field: Visible,      type: bool }
+  - { field: Multi,        type: bool  }
+  - { field: DefaultValue, type: "types.RecordValueSet"  }
+  - { field: CreatedAt }
+  - { field: UpdatedAt }
+  - { field: DeletedAt }
+
+rdbms:
+  alias: cmf
+  table: compose_module_field
+
+search:
+  disable: true

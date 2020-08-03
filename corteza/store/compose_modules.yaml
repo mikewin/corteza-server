@@ -1,0 +1,24 @@
+import:
+  - github.com/cortezaproject/corteza-server/compose/types
+
+types:
+  type: types.Module
+
+fields:
+  - { field: ID }
+  - { field: Handle, lookupFilterPreprocessor: lower }
+  - { field: Name }
+  - { field: Meta, type: "types.JSONText" }
+  - { field: NamespaceID }
+  - { field: CreatedAt }
+  - { field: UpdatedAt }
+  - { field: DeletedAt }
+
+lookups:
+  - fields: [ Handle ]
+    description: |-
+      searches for compose module by handle (case-insensitive)
+
+rdbms:
+  alias: cmd
+  table: compose_module

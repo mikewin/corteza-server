@@ -1,0 +1,44 @@
+import:
+  - github.com/cortezaproject/corteza-server/system/types
+
+fields:
+  - { field: ID }
+  - { field: Resource }
+  - { field: Payload }
+  - { field: SnoozeCount }
+  - { field: AssignedTo }
+  - { field: AssignedBy }
+  - { field: AssignedAt }
+  - { field: DismissedBy }
+  - { field: DismissedAt }
+  - { field: RemindAt }
+  - { field: CreatedAt }
+  - { field: UpdatedAt }
+  - { field: DeletedAt }
+
+lookups:
+  - fields: [ ID ]
+    description: |-
+      searches for reminder by its ID
+
+      It returns reminder even if deleted or suspended
+
+partialUpdates:
+  - name: delete
+    set: { DeletedAt: now() }
+  - name: undelete
+    set: { DeletedAt: nil }
+  - name: dismiss
+    args: [ DismissedBy ]
+    set: { DismissedAt: now() }
+  - name: undismiss
+    set: { DismissedAt: nil, DismissedBy: 0 }
+  - name: assign
+    args: [ AssignedBy ]
+    set: { AssignedAt: now() }
+  - name: unassign
+    set: { AssignedAt: nil, AssignedBy: 0 }
+
+rdbms:
+  alias: rmd
+  table: sys_reminder

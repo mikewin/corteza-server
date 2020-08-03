@@ -1,0 +1,24 @@
+import:
+  - github.com/cortezaproject/corteza-server/compose/types
+
+types:
+  type: types.Chart
+
+fields:
+  - { field: ID }
+  - { field: Handle, lookupFilterPreprocessor: lower }
+  - { field: Name }
+  - { field: Config, type: "types.ChartConfig" }
+  - { field: NamespaceID }
+  - { field: CreatedAt }
+  - { field: UpdatedAt }
+  - { field: DeletedAt }
+
+lookups:
+  - fields: [ Handle ]
+    description: |-
+      searches for compose chart by handle (case-insensitive)
+
+rdbms:
+  alias: cch
+  table: compose_chart

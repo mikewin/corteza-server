@@ -1,0 +1,29 @@
+import:
+  - github.com/cortezaproject/corteza-server/system/types
+
+fields:
+  - { field: ID }
+  - { field: Name }
+  - { field: OwnerID }
+  - { field: Enabled }
+  - { field: Unify }
+  - { field: CreatedAt }
+  - { field: UpdatedAt }
+  - { field: DeletedAt }
+
+lookups:
+  - fields: [ ID ]
+    description: |-
+      searches for application by their ID
+
+      It returns application even if deleted or suspended
+
+partialUpdates:
+  - name: delete
+    set: { DeletedAt: now() }
+  - name: undelete
+    set: { DeletedAt: nil }
+
+rdbms:
+  alias: app
+  table: sys_application

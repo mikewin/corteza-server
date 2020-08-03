@@ -1,0 +1,24 @@
+import:
+  - github.com/cortezaproject/corteza-server/pkg/settings
+
+
+types:
+  package: settings
+  type: settings.Value
+  filterType: settings.Filter
+
+fields:
+  - { field: Name, isPrimaryKey: true }
+  - { field: Value }
+  - { field: OwnedBy, isPrimaryKey: true }
+  - { field: UpdatedBy }
+  - { field: UpdatedAt }
+
+lookups:
+  - fields: [ Name, OwnedBy ]
+    description: |-
+      searches for settings by name and owner
+
+rdbms:
+  alias: st
+  table: settings

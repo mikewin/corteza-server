@@ -1,0 +1,24 @@
+import:
+  - github.com/cortezaproject/corteza-server/compose/types
+
+types:
+  type: types.Namespace
+
+fields:
+  - { field: ID }
+  - { field: Name }
+  - { field: Slug, lookupFilterPreprocessor: lower }
+  - { field: Enabled }
+  - { field: Meta, type: "*types.NamespaceMeta" }
+  - { field: CreatedAt }
+  - { field: UpdatedAt }
+  - { field: DeletedAt }
+
+lookups:
+  - fields: [ Slug ]
+    description: |-
+      searches for namespace by slug (case-insensitive)
+
+rdbms:
+  alias: cns
+  table: compose_namespace

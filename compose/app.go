@@ -2,7 +2,7 @@ package compose
 
 import (
 	"context"
-	"github.com/cortezaproject/corteza-server/corteza/repository/mysql/schema"
+	"github.com/cortezaproject/corteza-server/corteza/store/mysql/schema"
 
 	"github.com/cortezaproject/corteza-server/pkg/automation"
 
