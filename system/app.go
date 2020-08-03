@@ -2,17 +2,11 @@ package system
 
 import (
 	"context"
-	"github.com/cortezaproject/corteza-server/corteza/store/mysql/schema"
-	"github.com/cortezaproject/corteza-server/pkg/automation"
-
-	"github.com/go-chi/chi"
-	_ "github.com/joho/godotenv/autoload"
-	"github.com/spf13/cobra"
-	"go.uber.org/zap"
-	"google.golang.org/grpc"
-
+	"github.com/cortezaproject/corteza-server/corteza/store/mysql"
+	"github.com/cortezaproject/corteza-server/corteza/store/provisioner"
 	"github.com/cortezaproject/corteza-server/pkg/app"
 	"github.com/cortezaproject/corteza-server/pkg/auth"
+	"github.com/cortezaproject/corteza-server/pkg/automation"
 	"github.com/cortezaproject/corteza-server/pkg/corredor"
 	"github.com/cortezaproject/corteza-server/pkg/scheduler"
 	"github.com/cortezaproject/corteza-server/system/auth/external"
@@ -22,6 +16,11 @@ import (
 	"github.com/cortezaproject/corteza-server/system/rest"
 	"github.com/cortezaproject/corteza-server/system/service"
 	"github.com/cortezaproject/corteza-server/system/service/event"
+	"github.com/go-chi/chi"
+	_ "github.com/joho/godotenv/autoload"
+	"github.com/spf13/cobra"
+	"go.uber.org/zap"
+	"google.golang.org/grpc"
 )
 
 type (
@@ -49,12 +48,14 @@ func (app *App) Setup(log *zap.Logger, opts *app.Options) (err error) {
 }
 
 func (app *App) Upgrade(ctx context.Context) (err error) {
-	err = schema.ProvisionSystem(ctx, app.Opts.DB.DSN, func(_ int, msg string) { app.Log.Info(msg) })
+	s, err := mysql.New(ctx, app.Opts.DB.DSN)
 	if err != nil {
 		return
 	}
 
-	return
+	return provisioner.
+		NewProvisioner(func(_ int, msg string) { app.Log.Info(msg) }).
+		Run(s.ProvisionCompose())
 }
 
 // Initialized

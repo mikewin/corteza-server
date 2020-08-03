@@ -2,13 +2,8 @@ package messaging
 
 import (
 	"context"
-	"github.com/cortezaproject/corteza-server/corteza/store/mysql/schema"
-
-	"github.com/go-chi/chi"
-	_ "github.com/joho/godotenv/autoload"
-	"github.com/spf13/cobra"
-	"go.uber.org/zap"
-
+	"github.com/cortezaproject/corteza-server/corteza/store/mysql"
+	"github.com/cortezaproject/corteza-server/corteza/store/provisioner"
 	"github.com/cortezaproject/corteza-server/messaging/commands"
 	"github.com/cortezaproject/corteza-server/messaging/rest"
 	"github.com/cortezaproject/corteza-server/messaging/service"
@@ -18,6 +13,10 @@ import (
 	"github.com/cortezaproject/corteza-server/pkg/auth"
 	"github.com/cortezaproject/corteza-server/pkg/corredor"
 	"github.com/cortezaproject/corteza-server/pkg/scheduler"
+	"github.com/go-chi/chi"
+	_ "github.com/joho/godotenv/autoload"
+	"github.com/spf13/cobra"
+	"go.uber.org/zap"
 )
 
 type (
@@ -54,12 +53,14 @@ func (app *App) Setup(log *zap.Logger, opts *app.Options) (err error) {
 }
 
 func (app *App) Upgrade(ctx context.Context) (err error) {
-	err = schema.ProvisionMessaging(ctx, app.Opts.DB.DSN, func(_ int, msg string) { app.Log.Info(msg) })
+	s, err := mysql.New(ctx, app.Opts.DB.DSN)
 	if err != nil {
 		return
 	}
 
-	return
+	return provisioner.
+		NewProvisioner(func(_ int, msg string) { app.Log.Info(msg) }).
+		Run(s.ProvisionMessaging())
 }
 
 func (app *App) Initialize(ctx context.Context) (err error) {
