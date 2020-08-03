@@ -2,7 +2,6 @@ package codegen
 
 import (
 	"github.com/cortezaproject/corteza-server/pkg/cli"
-	"github.com/davecgh/go-spew/spew"
 	"strings"
 	"text/template"
 )
@@ -15,6 +14,7 @@ type (
 		Actions []*actionsDef
 		Events  []*eventsDef
 		Types   []*typesDef
+		Store   []*storeDef
 	}
 )
 
@@ -27,8 +27,25 @@ func Proc() {
 		tpls = template.New("").Funcs(map[string]interface{}{
 			"camelCase":       camelCase,
 			"pubIdent":        pubIdent,
+			"unpubIdent":      unpubIdent,
 			"toLower":         strings.ToLower,
+			"cc2underscore":   cc2underscore,
 			"normalizeImport": normalizeImport,
+			"comment": func(text string, skip1st bool) string {
+				ll := strings.Split(text, "\n")
+				s := 0
+				out := ""
+				if skip1st {
+					s = 1
+					out = ll[0] + "\n"
+				}
+
+				for ; s < len(ll); s++ {
+					out += "// " + ll[s] + "\n"
+				}
+
+				return out
+			},
 		})
 	)
 
@@ -55,7 +72,12 @@ func Proc() {
 	if def.Rest, err = procRest(); err != nil {
 		cli.HandleError(err)
 	} else {
-		spew.Dump(def.Rest)
 		cli.HandleError(genRest(tpls, def.Rest))
+	}
+
+	if def.Store, err = procStore(); err != nil {
+		cli.HandleError(err)
+	} else {
+		cli.HandleError(genStore(tpls, def.Store))
 	}
 }

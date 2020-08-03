@@ -123,7 +123,6 @@ func genRest(tpl *template.Template, dd []*restDef) (err error) {
 
 			// Generic code, every event goes into one file (per app)
 			dst = path.Join(d.outputDir, "rest", "handlers", e.Entrypoint+".go")
-			println(dst)
 			err = goTemplate(dst, tplHandler, map[string]interface{}{
 				"Source":   d.Source,
 				"Endpoint": e,
@@ -135,7 +134,6 @@ func genRest(tpl *template.Template, dd []*restDef) (err error) {
 
 			// Generic code, every event goes into one file (per app)
 			dst = path.Join(d.outputDir, "rest", "request", e.Entrypoint+".go")
-			println(dst)
 			err = goTemplate(dst, tplRequest, map[string]interface{}{
 				"Source":   d.Source,
 				"Endpoint": e,

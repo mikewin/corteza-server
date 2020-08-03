@@ -12,7 +12,7 @@ import (
 	"text/template"
 )
 
-func goTemplate(dst string, tpl *template.Template, payload interface{}) error {
+func goTemplate(dst string, tpl *template.Template, payload interface{}) (err error) {
 	var output io.WriteCloser
 	buf := bytes.Buffer{}
 
@@ -22,7 +22,8 @@ func goTemplate(dst string, tpl *template.Template, payload interface{}) error {
 
 	fmtsrc, err := format.Source(buf.Bytes())
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "fmt warn: %v", err)
+		_, _ = fmt.Fprintf(os.Stderr, "%s fmt warn: %v\n", dst, err)
+
 		err = nil
 		fmtsrc = buf.Bytes()
 	}
@@ -54,7 +55,6 @@ func WritePlainTo(tpl *template.Template, payload interface{}, tplName, dst stri
 		if dst == "" || dst == "-" {
 			output = os.Stdout
 		} else {
-			// cli.HandleError(os.Remove(dst))
 			if output, err = os.Create(dst); err != nil {
 				cli.HandleError(err)
 			}
@@ -98,6 +98,11 @@ func pubIdent(pp ...string) (out string) {
 	}
 
 	return out
+}
+
+func unpubIdent(pp ...string) (out string) {
+	out = pubIdent(pp...)
+	return strings.ToLower(out[:1]) + out[1:]
 }
 
 // convets to underscore
