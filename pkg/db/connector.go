@@ -11,7 +11,7 @@ import (
 	"github.com/titpetric/factory/logger"
 	"go.uber.org/zap"
 
-	"github.com/cortezaproject/corteza-server/pkg/app/options"
+	"github.com/cortezaproject/corteza-server/pkg/options"
 	"github.com/cortezaproject/corteza-server/pkg/sentry"
 )
 

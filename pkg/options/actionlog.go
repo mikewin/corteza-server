@@ -13,7 +13,7 @@ func ActionLog() (o *ActionLogOpt) {
 		Debug:   false,
 	}
 
-	fill(o, "")
+	fill(o)
 
 	return
 }

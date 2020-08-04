@@ -27,7 +27,7 @@ func DB(pfix string) (o *DBOpt) {
 		Timeout:  maxTries * delay,
 	}
 
-	fill(o, pfix)
+	fill(o)
 
 	if !strings.Contains(o.DSN, "://") {
 		// Make sure DSN is compatible with new requirements

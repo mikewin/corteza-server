@@ -7,9 +7,9 @@ import (
 
 	"github.com/cortezaproject/corteza-server/pkg/actionlog"
 	actionlogRepository "github.com/cortezaproject/corteza-server/pkg/actionlog/repository"
-	"github.com/cortezaproject/corteza-server/pkg/app/options"
 	intAuth "github.com/cortezaproject/corteza-server/pkg/auth"
 	"github.com/cortezaproject/corteza-server/pkg/eventbus"
+	"github.com/cortezaproject/corteza-server/pkg/options"
 	"github.com/cortezaproject/corteza-server/pkg/permissions"
 	"github.com/cortezaproject/corteza-server/pkg/settings"
 	"github.com/cortezaproject/corteza-server/pkg/store"

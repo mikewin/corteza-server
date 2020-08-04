@@ -14,7 +14,7 @@ func Monitor(pfix string) (o *MonitorOpt) {
 	o = &MonitorOpt{
 		Interval: 300 * time.Second,
 	}
-	fill(o, pfix)
+	fill(o)
 
 	return
 }

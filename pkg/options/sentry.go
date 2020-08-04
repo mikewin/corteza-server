@@ -28,7 +28,7 @@ func Sentry(pfix string) (o *SentryOpt) {
 		Release: version.Version,
 	}
 
-	fill(o, pfix)
+	fill(o)
 
 	return
 }

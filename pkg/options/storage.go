@@ -26,7 +26,7 @@ func Storage(pfix string) (o *StorageOpt) {
 		MinioStrict: false,
 	}
 
-	fill(o, pfix)
+	fill(o)
 
 	return
 }

@@ -60,7 +60,7 @@ func HTTP(pfix string) (o *HTTPServerOpt) {
 		WebappList:    "admin,auth,messaging,compose",
 	}
 
-	fill(o, pfix)
+	fill(o)
 
 	return
 }

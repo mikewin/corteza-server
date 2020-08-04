@@ -26,7 +26,7 @@ func WaitFor(pfix string) (o *WaitForOpt) {
 		ServicesProbeInterval: time.Second * 5,
 	}
 
-	fill(o, pfix)
+	fill(o)
 
 	return
 }

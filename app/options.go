@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/cortezaproject/corteza-server/pkg/app/options"
+	"github.com/cortezaproject/corteza-server/pkg/options"
 )
 
 type (

@@ -17,7 +17,7 @@ func HttpClient(pfix string) (o *HTTPClientOpt) {
 		HttpClientTimeout: 30 * time.Second,
 	}
 
-	fill(o, pfix)
+	fill(o)
 
 	return
 }

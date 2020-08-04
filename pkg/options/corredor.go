@@ -51,7 +51,7 @@ func Corredor() (o *CorredorOpt) {
 		TlsCertPrivate: "private.key",
 	}
 
-	fill(o, "")
+	fill(o)
 
 	o.TlsCertCA = path.Join(o.TlsCertPath, o.TlsCertCA)
 	o.TlsCertPrivate = path.Join(o.TlsCertPath, o.TlsCertPrivate)

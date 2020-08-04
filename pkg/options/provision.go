@@ -11,7 +11,7 @@ func Provision(pfix string) (o *ProvisionOpt) {
 		Always: true,
 	}
 
-	fill(o, pfix)
+	fill(o)
 
 	return
 }

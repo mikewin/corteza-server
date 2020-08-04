@@ -18,7 +18,7 @@ func Auth() (o *AuthOpt) {
 		Expiry: time.Hour * 24 * 30,
 	}
 
-	fill(o, "")
+	fill(o)
 
 	// Setting JWT secret to random string to prevent security accidents...
 	//

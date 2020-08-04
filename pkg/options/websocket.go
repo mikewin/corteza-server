@@ -25,7 +25,7 @@ func Websocket(pfix string) (o *WebsocketOpt) {
 		PingPeriod:  pingPeriod,
 	}
 
-	fill(o, pfix)
+	fill(o)
 
 	return
 }

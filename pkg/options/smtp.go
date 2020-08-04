@@ -19,7 +19,7 @@ func SMTP(pfix string) (o *SMTPOpt) {
 		From: "",
 	}
 
-	fill(o, pfix)
+	fill(o)
 
 	return
 }

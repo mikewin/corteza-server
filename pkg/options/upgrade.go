@@ -11,7 +11,7 @@ func Upgrade(pfix string) (o *UpgradeOpt) {
 		Always: true,
 	}
 
-	fill(o, pfix)
+	fill(o)
 
 	return
 }

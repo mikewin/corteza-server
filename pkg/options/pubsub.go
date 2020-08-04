@@ -35,7 +35,7 @@ func PubSub(pfix string) (o *PubSubOpt) {
 		RedisPingPeriod:  pingPeriod,
 	}
 
-	fill(o, pfix)
+	fill(o)
 
 	return
 }
