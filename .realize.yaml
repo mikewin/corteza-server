@@ -4,10 +4,10 @@ settings:
 schema:
 # ######################################################################################################################
 - name: "COR"
-  path: "./cmd/monolith"
+  path: "./cmd/corteza"
   commands: { run: { status: true } }
   args: [ "serve-api" ]
   watcher:
-    paths: [ "." , "../../system" , "../../messaging" , "../../compose" , "../../pkg" , "../../internal" ]
+    paths: [ "../" , "../../system" , "../../messaging" , "../../compose" , "../../pkg" , "../../corteza" , "../../app" ]
     extensions: [ "go" ]
     ignored_paths: [ "../../vendor", "../../.git" ]
