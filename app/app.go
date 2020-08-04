@@ -2,7 +2,6 @@ package app
 
 import (
 	"context"
-	"github.com/cortezaproject/corteza-server/pkg/app"
 	"github.com/go-chi/chi"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
@@ -21,7 +20,7 @@ type (
 	}
 
 	CortezaApp struct {
-		Opt *app.Options
+		Opt *Options
 		lvl int
 		Log *zap.Logger
 
@@ -36,7 +35,7 @@ type (
 
 func New() *CortezaApp {
 	app := &CortezaApp{
-		Opt: app.NewOptions(),
+		Opt: NewOptions(),
 		lvl: bootLevelWaiting,
 	}
 
