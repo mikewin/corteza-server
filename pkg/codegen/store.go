@@ -128,7 +128,7 @@ type (
 )
 
 var (
-	outputDir string = "corteza/store"
+	outputDir string = "store"
 )
 
 func procStore() ([]*storeDef, error) {

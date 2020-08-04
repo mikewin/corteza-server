@@ -12,7 +12,7 @@ import (
 	"context"
 	"github.com/jmoiron/sqlx"
 	"github.com/Masterminds/squirrel"
-	"github.com/cortezaproject/corteza-server/corteza/store"
+	"github.com/cortezaproject/corteza-server/store"
 
 {{- range $import := $.Import }}
     {{ normalizeImport $import }}

@@ -8,8 +8,8 @@ package test_store
 
 import (
 	"context"
-	"github.com/cortezaproject/corteza-server/corteza/store"
-	"github.com/cortezaproject/corteza-server/corteza/store/provisioner"
+	"github.com/cortezaproject/corteza-server/store"
+	"github.com/cortezaproject/corteza-server/store/provisioner"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

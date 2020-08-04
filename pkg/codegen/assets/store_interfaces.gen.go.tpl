@@ -10,7 +10,7 @@ package store
 
 import (
 	"context"
-	"github.com/cortezaproject/corteza-server/corteza/store/provisioner"
+	"github.com/cortezaproject/corteza-server/store/provisioner"
 {{- range .Import }}
 	{{ normalizeImport . }}
 {{- end }}

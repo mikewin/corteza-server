@@ -9,7 +9,7 @@ package bulk
 
 import (
 	"context"
-	"github.com/cortezaproject/corteza-server/corteza/store"
+	"github.com/cortezaproject/corteza-server/store"
 {{- range $import := $.Import }}
     {{ normalizeImport $import }}
 {{- end }}
