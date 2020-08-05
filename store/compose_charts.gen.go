@@ -27,8 +27,8 @@ type (
 		TruncateComposeCharts(ctx context.Context) error
 	}
 
-	ComposeChartsProvisioned interface {
+	ComposeChartsUpgrader interface {
 		ComposeCharts
-		ProvisionComposeCharts() scenario.Executor
+		UpgradeComposeCharts() scenario.Executor
 	}
 )

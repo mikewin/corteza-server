@@ -25,8 +25,8 @@ type (
 		TruncateComposeModuleFields(ctx context.Context) error
 	}
 
-	ComposeModuleFieldsProvisioned interface {
+	ComposeModuleFieldsUpgrader interface {
 		ComposeModuleFields
-		ProvisionComposeModuleFields() scenario.Executor
+		UpgradeComposeModuleFields() scenario.Executor
 	}
 )

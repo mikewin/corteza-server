@@ -1,4 +1,4 @@
-package test_store
+package tests
 
 // This file is auto-generated.
 //
@@ -18,15 +18,15 @@ func testAllGenerated(t *testing.T, all interface{}) {
 {{ range . }}
 	// Run generated tests for {{ .Types.Base }}
 	t.Run({{ printf "%q" .Types.Base }}, func(t *testing.T) {
-		var s = all.(store.{{ pubIdent .Types.Plural }}Provisioned)
+		var s = all.(store.{{ pubIdent .Types.Plural }}Upgrader)
 
-		t.Run("provision", func(t *testing.T) {
+		t.Run("Upgrade", func(t *testing.T) {
 			var (
 				ctx = context.Background()
 				req = require.New(t)
 			)
 
-			req.NoError(scenario.NewScenario(nil).Run(s.Provision{{ pubIdent .Types.Plural }}()))
+			req.NoError(scenario.NewScenario(nil).Play(s.Upgrade{{ pubIdent .Types.Plural }}()))
 			req.NoError(s.Truncate{{ pubIdent .Types.Plural }}(ctx))
 		})
 

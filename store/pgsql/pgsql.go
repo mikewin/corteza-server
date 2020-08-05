@@ -33,11 +33,11 @@ func New(ctx context.Context, dsn string) (s *Store, err error) {
 	return s, nil
 }
 
-func (s *Store) Provision() Executor {
+func (s *Store) Upgrade() Executor {
 	return Do(
-		s.ProvisionCore(),
-		s.ProvisionCompose(),
-		s.ProvisionMessaging(),
+		s.UpgradeCore(),
+		s.UpgradeCompose(),
+		s.UpgradeMessaging(),
 	)
 }
 

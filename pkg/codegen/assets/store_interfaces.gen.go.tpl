@@ -37,8 +37,8 @@ type (
 		Truncate{{ pubIdent $Types.Plural }}(ctx context.Context) error
 	}
 
-	{{ pubIdent .Types.Plural }}Provisioned interface {
+	{{ pubIdent .Types.Plural }}Upgrader interface {
 		{{ pubIdent .Types.Plural }}
-		Provision{{ pubIdent $Types.Plural }}() scenario.Executor
+		Upgrade{{ pubIdent $Types.Plural }}() scenario.Executor
 	}
 )

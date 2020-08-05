@@ -29,8 +29,8 @@ type (
 		TruncateRoles(ctx context.Context) error
 	}
 
-	RolesProvisioned interface {
+	RolesUpgrader interface {
 		Roles
-		ProvisionRoles() scenario.Executor
+		UpgradeRoles() scenario.Executor
 	}
 )

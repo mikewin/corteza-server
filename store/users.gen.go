@@ -30,8 +30,8 @@ type (
 		TruncateUsers(ctx context.Context) error
 	}
 
-	UsersProvisioned interface {
+	UsersUpgrader interface {
 		Users
-		ProvisionUsers() scenario.Executor
+		UpgradeUsers() scenario.Executor
 	}
 )

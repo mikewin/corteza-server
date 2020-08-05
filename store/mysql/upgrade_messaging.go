@@ -4,17 +4,17 @@ import (
 	. "github.com/cortezaproject/corteza-server/pkg/scenario"
 )
 
-func (s *Store) ProvisionMessaging() Executor {
+func (s *Store) UpgradeMessaging() Executor {
 	return Do(
-		s.ProvisionMessagingChannel(),
-		s.ProvisionMessagingMessage(),
-		s.ProvisionMessagingPermissionRules(),
-		s.ProvisionMessagingSettings(),
+		s.UpgradeMessagingChannel(),
+		s.UpgradeMessagingMessage(),
+		s.UpgradeMessagingPermissionRules(),
+		s.UpgradeMessagingSettings(),
 	)
 }
 
-func (s *Store) ProvisionMessagingChannel() Executor {
-	sp := &storeProvision{s}
+func (s *Store) UpgradeMessagingChannel() Executor {
+	sp := &storeUpgrade{s}
 
 	return Do(
 		sp.createTable(s.MessagingChannelTableDef()),
@@ -22,8 +22,8 @@ func (s *Store) ProvisionMessagingChannel() Executor {
 	)
 }
 
-func (s *Store) ProvisionMessagingMessage() Executor {
-	sp := &storeProvision{s}
+func (s *Store) UpgradeMessagingMessage() Executor {
+	sp := &storeUpgrade{s}
 
 	return Do(
 		sp.createTable(s.MessagingMessageTableDef()),
@@ -34,16 +34,16 @@ func (s *Store) ProvisionMessagingMessage() Executor {
 	)
 }
 
-func (s *Store) ProvisionMessagingPermissionRules() Executor {
-	sp := &storeProvision{s}
+func (s *Store) UpgradeMessagingPermissionRules() Executor {
+	sp := &storeUpgrade{s}
 
 	return Do(
 		sp.createTable(s.MessagingSettingsTableDef()),
 	)
 }
 
-func (s *Store) ProvisionMessagingSettings() Executor {
-	sp := &storeProvision{s}
+func (s *Store) UpgradeMessagingSettings() Executor {
+	sp := &storeUpgrade{s}
 
 	return Do(
 		sp.createTable(s.MessagingSettingsTableDef()),

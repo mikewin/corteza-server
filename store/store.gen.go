@@ -24,18 +24,18 @@ type (
 	}
 
 	// Interface combines interfaces of all supported store interfaces
-	Provisioned interface {
-		ApplicationsProvisioned
-		ComposeChartsProvisioned
-		ComposeModuleFieldsProvisioned
-		ComposeModulesProvisioned
-		ComposeNamespacesProvisioned
-		ComposePagesProvisioned
-		CredentialsProvisioned
-		RemindersProvisioned
-		RolesProvisioned
-		SettingsProvisioned
-		AttachmentsProvisioned
-		UsersProvisioned
+	Upgrader interface {
+		ApplicationsUpgrader
+		ComposeChartsUpgrader
+		ComposeModuleFieldsUpgrader
+		ComposeModulesUpgrader
+		ComposeNamespacesUpgrader
+		ComposePagesUpgrader
+		CredentialsUpgrader
+		RemindersUpgrader
+		RolesUpgrader
+		SettingsUpgrader
+		AttachmentsUpgrader
+		UsersUpgrader
 	}
 )

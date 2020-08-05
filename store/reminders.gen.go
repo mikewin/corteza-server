@@ -27,8 +27,8 @@ type (
 		TruncateReminders(ctx context.Context) error
 	}
 
-	RemindersProvisioned interface {
+	RemindersUpgrader interface {
 		Reminders
-		ProvisionReminders() scenario.Executor
+		UpgradeReminders() scenario.Executor
 	}
 )

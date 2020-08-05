@@ -27,8 +27,8 @@ type (
 		TruncateSettings(ctx context.Context) error
 	}
 
-	SettingsProvisioned interface {
+	SettingsUpgrader interface {
 		Settings
-		ProvisionSettings() scenario.Executor
+		UpgradeSettings() scenario.Executor
 	}
 )

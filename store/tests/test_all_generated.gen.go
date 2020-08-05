@@ -1,4 +1,4 @@
-package test_store
+package tests
 
 // This file is auto-generated.
 //
@@ -18,15 +18,15 @@ func testAllGenerated(t *testing.T, all interface{}) {
 
 	// Run generated tests for Applications
 	t.Run("Applications", func(t *testing.T) {
-		var s = all.(store.ApplicationsProvisioned)
+		var s = all.(store.ApplicationsUpgrader)
 
-		t.Run("provision", func(t *testing.T) {
+		t.Run("Upgrade", func(t *testing.T) {
 			var (
 				ctx = context.Background()
 				req = require.New(t)
 			)
 
-			req.NoError(runner.NewScenario(nil).Run(s.ProvisionApplications()))
+			req.NoError(scenario.NewScenario(nil).Play(s.UpgradeApplications()))
 			req.NoError(s.TruncateApplications(ctx))
 		})
 
@@ -35,15 +35,15 @@ func testAllGenerated(t *testing.T, all interface{}) {
 
 	// Run generated tests for ComposeCharts
 	t.Run("ComposeCharts", func(t *testing.T) {
-		var s = all.(store.ComposeChartsProvisioned)
+		var s = all.(store.ComposeChartsUpgrader)
 
-		t.Run("provision", func(t *testing.T) {
+		t.Run("Upgrade", func(t *testing.T) {
 			var (
 				ctx = context.Background()
 				req = require.New(t)
 			)
 
-			req.NoError(runner.NewScenario(nil).Run(s.ProvisionComposeCharts()))
+			req.NoError(scenario.NewScenario(nil).Play(s.UpgradeComposeCharts()))
 			req.NoError(s.TruncateComposeCharts(ctx))
 		})
 
@@ -52,15 +52,15 @@ func testAllGenerated(t *testing.T, all interface{}) {
 
 	// Run generated tests for ComposeModuleFields
 	t.Run("ComposeModuleFields", func(t *testing.T) {
-		var s = all.(store.ComposeModuleFieldsProvisioned)
+		var s = all.(store.ComposeModuleFieldsUpgrader)
 
-		t.Run("provision", func(t *testing.T) {
+		t.Run("Upgrade", func(t *testing.T) {
 			var (
 				ctx = context.Background()
 				req = require.New(t)
 			)
 
-			req.NoError(runner.NewScenario(nil).Run(s.ProvisionComposeModuleFields()))
+			req.NoError(scenario.NewScenario(nil).Play(s.UpgradeComposeModuleFields()))
 			req.NoError(s.TruncateComposeModuleFields(ctx))
 		})
 
@@ -69,15 +69,15 @@ func testAllGenerated(t *testing.T, all interface{}) {
 
 	// Run generated tests for ComposeModules
 	t.Run("ComposeModules", func(t *testing.T) {
-		var s = all.(store.ComposeModulesProvisioned)
+		var s = all.(store.ComposeModulesUpgrader)
 
-		t.Run("provision", func(t *testing.T) {
+		t.Run("Upgrade", func(t *testing.T) {
 			var (
 				ctx = context.Background()
 				req = require.New(t)
 			)
 
-			req.NoError(runner.NewScenario(nil).Run(s.ProvisionComposeModules()))
+			req.NoError(scenario.NewScenario(nil).Play(s.UpgradeComposeModules()))
 			req.NoError(s.TruncateComposeModules(ctx))
 		})
 
@@ -86,15 +86,15 @@ func testAllGenerated(t *testing.T, all interface{}) {
 
 	// Run generated tests for ComposeNamespaces
 	t.Run("ComposeNamespaces", func(t *testing.T) {
-		var s = all.(store.ComposeNamespacesProvisioned)
+		var s = all.(store.ComposeNamespacesUpgrader)
 
-		t.Run("provision", func(t *testing.T) {
+		t.Run("Upgrade", func(t *testing.T) {
 			var (
 				ctx = context.Background()
 				req = require.New(t)
 			)
 
-			req.NoError(runner.NewScenario(nil).Run(s.ProvisionComposeNamespaces()))
+			req.NoError(scenario.NewScenario(nil).Play(s.UpgradeComposeNamespaces()))
 			req.NoError(s.TruncateComposeNamespaces(ctx))
 		})
 
@@ -103,15 +103,15 @@ func testAllGenerated(t *testing.T, all interface{}) {
 
 	// Run generated tests for ComposePages
 	t.Run("ComposePages", func(t *testing.T) {
-		var s = all.(store.ComposePagesProvisioned)
+		var s = all.(store.ComposePagesUpgrader)
 
-		t.Run("provision", func(t *testing.T) {
+		t.Run("Upgrade", func(t *testing.T) {
 			var (
 				ctx = context.Background()
 				req = require.New(t)
 			)
 
-			req.NoError(runner.NewScenario(nil).Run(s.ProvisionComposePages()))
+			req.NoError(scenario.NewScenario(nil).Play(s.UpgradeComposePages()))
 			req.NoError(s.TruncateComposePages(ctx))
 		})
 
@@ -120,15 +120,15 @@ func testAllGenerated(t *testing.T, all interface{}) {
 
 	// Run generated tests for Credentials
 	t.Run("Credentials", func(t *testing.T) {
-		var s = all.(store.CredentialsProvisioned)
+		var s = all.(store.CredentialsUpgrader)
 
-		t.Run("provision", func(t *testing.T) {
+		t.Run("Upgrade", func(t *testing.T) {
 			var (
 				ctx = context.Background()
 				req = require.New(t)
 			)
 
-			req.NoError(runner.NewScenario(nil).Run(s.ProvisionCredentials()))
+			req.NoError(scenario.NewScenario(nil).Play(s.UpgradeCredentials()))
 			req.NoError(s.TruncateCredentials(ctx))
 		})
 
@@ -137,15 +137,15 @@ func testAllGenerated(t *testing.T, all interface{}) {
 
 	// Run generated tests for Reminders
 	t.Run("Reminders", func(t *testing.T) {
-		var s = all.(store.RemindersProvisioned)
+		var s = all.(store.RemindersUpgrader)
 
-		t.Run("provision", func(t *testing.T) {
+		t.Run("Upgrade", func(t *testing.T) {
 			var (
 				ctx = context.Background()
 				req = require.New(t)
 			)
 
-			req.NoError(runner.NewScenario(nil).Run(s.ProvisionReminders()))
+			req.NoError(scenario.NewScenario(nil).Play(s.UpgradeReminders()))
 			req.NoError(s.TruncateReminders(ctx))
 		})
 
@@ -154,15 +154,15 @@ func testAllGenerated(t *testing.T, all interface{}) {
 
 	// Run generated tests for Roles
 	t.Run("Roles", func(t *testing.T) {
-		var s = all.(store.RolesProvisioned)
+		var s = all.(store.RolesUpgrader)
 
-		t.Run("provision", func(t *testing.T) {
+		t.Run("Upgrade", func(t *testing.T) {
 			var (
 				ctx = context.Background()
 				req = require.New(t)
 			)
 
-			req.NoError(runner.NewScenario(nil).Run(s.ProvisionRoles()))
+			req.NoError(scenario.NewScenario(nil).Play(s.UpgradeRoles()))
 			req.NoError(s.TruncateRoles(ctx))
 		})
 
@@ -171,15 +171,15 @@ func testAllGenerated(t *testing.T, all interface{}) {
 
 	// Run generated tests for Settings
 	t.Run("Settings", func(t *testing.T) {
-		var s = all.(store.SettingsProvisioned)
+		var s = all.(store.SettingsUpgrader)
 
-		t.Run("provision", func(t *testing.T) {
+		t.Run("Upgrade", func(t *testing.T) {
 			var (
 				ctx = context.Background()
 				req = require.New(t)
 			)
 
-			req.NoError(runner.NewScenario(nil).Run(s.ProvisionSettings()))
+			req.NoError(scenario.NewScenario(nil).Play(s.UpgradeSettings()))
 			req.NoError(s.TruncateSettings(ctx))
 		})
 
@@ -188,15 +188,15 @@ func testAllGenerated(t *testing.T, all interface{}) {
 
 	// Run generated tests for Attachment
 	t.Run("Attachment", func(t *testing.T) {
-		var s = all.(store.AttachmentsProvisioned)
+		var s = all.(store.AttachmentsUpgrader)
 
-		t.Run("provision", func(t *testing.T) {
+		t.Run("Upgrade", func(t *testing.T) {
 			var (
 				ctx = context.Background()
 				req = require.New(t)
 			)
 
-			req.NoError(runner.NewScenario(nil).Run(s.ProvisionAttachments()))
+			req.NoError(scenario.NewScenario(nil).Play(s.UpgradeAttachments()))
 			req.NoError(s.TruncateAttachments(ctx))
 		})
 
@@ -205,15 +205,15 @@ func testAllGenerated(t *testing.T, all interface{}) {
 
 	// Run generated tests for Users
 	t.Run("Users", func(t *testing.T) {
-		var s = all.(store.UsersProvisioned)
+		var s = all.(store.UsersUpgrader)
 
-		t.Run("provision", func(t *testing.T) {
+		t.Run("Upgrade", func(t *testing.T) {
 			var (
 				ctx = context.Background()
 				req = require.New(t)
 			)
 
-			req.NoError(runner.NewScenario(nil).Run(s.ProvisionUsers()))
+			req.NoError(scenario.NewScenario(nil).Play(s.UpgradeUsers()))
 			req.NoError(s.TruncateUsers(ctx))
 		})
 

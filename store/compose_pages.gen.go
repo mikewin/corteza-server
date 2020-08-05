@@ -27,8 +27,8 @@ type (
 		TruncateComposePages(ctx context.Context) error
 	}
 
-	ComposePagesProvisioned interface {
+	ComposePagesUpgrader interface {
 		ComposePages
-		ProvisionComposePages() scenario.Executor
+		UpgradeComposePages() scenario.Executor
 	}
 )

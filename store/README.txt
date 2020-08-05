@@ -1,6 +1,6 @@
 Goal
  - multi-repository (different DB) support
- - refactor old raw-sql migrations to logical and dynamic schema provisioning
+ - refactor old raw-sql migrations to logical and dynamic schema Upgradeing
  - (tbd) consolidation of system & compose (& messaging) subsystems
 
 File system:
@@ -8,7 +8,7 @@ File system:
    /internal            Internal repository tools (pkg/ql, pgk/rh should be moved here)
  /<implementation>      Individual core repository implementation
                         [mysql|postgresql|redis|memory|sqlite|elasticsearch|mongo]
-   /schema              Schema provisioning for individual repository implementation
+   /schema              Schema Upgradeing for individual repository implementation
 
 
 
@@ -19,10 +19,10 @@ File system:
     RDBMS-like implementations
 
 /corteza/store/<rdbms-store-type>/sql_*.go
-        Database table definitions (used by provision_*.go)
+        Database table definitions (used by Upgrade_*.go)
 
-/corteza/store/<rdbms-store-type>/provision_*.go
-    Provision logic, cascading (eg: Provision => ProvisionSystem => ProvisionUsers)
+/corteza/store/<rdbms-store-type>/Upgrade_*.go
+    Upgrade logic, cascading (eg: Upgrade => UpgradeSystem => UpgradeUsers)
 
 
 

@@ -27,8 +27,8 @@ type (
 		TruncateComposeModules(ctx context.Context) error
 	}
 
-	ComposeModulesProvisioned interface {
+	ComposeModulesUpgrader interface {
 		ComposeModules
-		ProvisionComposeModules() scenario.Executor
+		UpgradeComposeModules() scenario.Executor
 	}
 )

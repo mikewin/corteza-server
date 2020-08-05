@@ -27,8 +27,8 @@ type (
 		TruncateAttachments(ctx context.Context) error
 	}
 
-	AttachmentsProvisioned interface {
+	AttachmentsUpgrader interface {
 		Attachments
-		ProvisionAttachments() scenario.Executor
+		UpgradeAttachments() scenario.Executor
 	}
 )

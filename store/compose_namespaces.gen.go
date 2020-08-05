@@ -27,8 +27,8 @@ type (
 		TruncateComposeNamespaces(ctx context.Context) error
 	}
 
-	ComposeNamespacesProvisioned interface {
+	ComposeNamespacesUpgrader interface {
 		ComposeNamespaces
-		ProvisionComposeNamespaces() scenario.Executor
+		UpgradeComposeNamespaces() scenario.Executor
 	}
 )

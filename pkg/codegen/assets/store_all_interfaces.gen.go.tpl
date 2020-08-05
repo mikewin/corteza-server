@@ -16,9 +16,9 @@ type (
 	}
 
 	// Interface combines interfaces of all supported store interfaces
-	Provisioned interface {
+	Upgrader interface {
 	{{ range . -}}
-		{{ pubIdent .Types.Plural }}Provisioned
+		{{ pubIdent .Types.Plural }}Upgrader
 	{{ end }}
 	}
 )

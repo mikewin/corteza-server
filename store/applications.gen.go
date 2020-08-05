@@ -27,8 +27,8 @@ type (
 		TruncateApplications(ctx context.Context) error
 	}
 
-	ApplicationsProvisioned interface {
+	ApplicationsUpgrader interface {
 		Applications
-		ProvisionApplications() scenario.Executor
+		UpgradeApplications() scenario.Executor
 	}
 )

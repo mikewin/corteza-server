@@ -113,7 +113,7 @@ func (app *CortezaApp) InitStore(ctx context.Context) error {
 
 	err = scenario.
 		NewScenario(func(_ int, msg string) { app.Log.Debug(strings.TrimSpace(msg)) }).
-		Play(s.Provision())
+		Play(s.Upgrade())
 
 	if err != nil {
 		return err

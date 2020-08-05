@@ -27,8 +27,8 @@ type (
 		TruncateCredentials(ctx context.Context) error
 	}
 
-	CredentialsProvisioned interface {
+	CredentialsUpgrader interface {
 		Credentials
-		ProvisionCredentials() scenario.Executor
+		UpgradeCredentials() scenario.Executor
 	}
 )

@@ -10,7 +10,6 @@ package event
 
 import (
 	"encoding/json"
-	"github.com/cortezaproject/corteza-server/messaging/types"
 	"github.com/cortezaproject/corteza-server/pkg/auth"
 )
 
