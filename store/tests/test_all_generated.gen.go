@@ -8,8 +8,8 @@ package test_store
 
 import (
 	"context"
+	"github.com/cortezaproject/corteza-server/pkg/scenario"
 	"github.com/cortezaproject/corteza-server/store"
-	"github.com/cortezaproject/corteza-server/store/provisioner"
 	"github.com/stretchr/testify/require"
 	"testing"
 )
@@ -26,7 +26,7 @@ func testAllGenerated(t *testing.T, all interface{}) {
 				req = require.New(t)
 			)
 
-			req.NoError(provisioner.NewProvisioner(nil).Run(s.ProvisionApplications()))
+			req.NoError(runner.NewScenario(nil).Run(s.ProvisionApplications()))
 			req.NoError(s.TruncateApplications(ctx))
 		})
 
@@ -43,7 +43,7 @@ func testAllGenerated(t *testing.T, all interface{}) {
 				req = require.New(t)
 			)
 
-			req.NoError(provisioner.NewProvisioner(nil).Run(s.ProvisionComposeCharts()))
+			req.NoError(runner.NewScenario(nil).Run(s.ProvisionComposeCharts()))
 			req.NoError(s.TruncateComposeCharts(ctx))
 		})
 
@@ -60,7 +60,7 @@ func testAllGenerated(t *testing.T, all interface{}) {
 				req = require.New(t)
 			)
 
-			req.NoError(provisioner.NewProvisioner(nil).Run(s.ProvisionComposeModuleFields()))
+			req.NoError(runner.NewScenario(nil).Run(s.ProvisionComposeModuleFields()))
 			req.NoError(s.TruncateComposeModuleFields(ctx))
 		})
 
@@ -77,7 +77,7 @@ func testAllGenerated(t *testing.T, all interface{}) {
 				req = require.New(t)
 			)
 
-			req.NoError(provisioner.NewProvisioner(nil).Run(s.ProvisionComposeModules()))
+			req.NoError(runner.NewScenario(nil).Run(s.ProvisionComposeModules()))
 			req.NoError(s.TruncateComposeModules(ctx))
 		})
 
@@ -94,7 +94,7 @@ func testAllGenerated(t *testing.T, all interface{}) {
 				req = require.New(t)
 			)
 
-			req.NoError(provisioner.NewProvisioner(nil).Run(s.ProvisionComposeNamespaces()))
+			req.NoError(runner.NewScenario(nil).Run(s.ProvisionComposeNamespaces()))
 			req.NoError(s.TruncateComposeNamespaces(ctx))
 		})
 
@@ -111,7 +111,7 @@ func testAllGenerated(t *testing.T, all interface{}) {
 				req = require.New(t)
 			)
 
-			req.NoError(provisioner.NewProvisioner(nil).Run(s.ProvisionComposePages()))
+			req.NoError(runner.NewScenario(nil).Run(s.ProvisionComposePages()))
 			req.NoError(s.TruncateComposePages(ctx))
 		})
 
@@ -128,7 +128,7 @@ func testAllGenerated(t *testing.T, all interface{}) {
 				req = require.New(t)
 			)
 
-			req.NoError(provisioner.NewProvisioner(nil).Run(s.ProvisionCredentials()))
+			req.NoError(runner.NewScenario(nil).Run(s.ProvisionCredentials()))
 			req.NoError(s.TruncateCredentials(ctx))
 		})
 
@@ -145,7 +145,7 @@ func testAllGenerated(t *testing.T, all interface{}) {
 				req = require.New(t)
 			)
 
-			req.NoError(provisioner.NewProvisioner(nil).Run(s.ProvisionReminders()))
+			req.NoError(runner.NewScenario(nil).Run(s.ProvisionReminders()))
 			req.NoError(s.TruncateReminders(ctx))
 		})
 
@@ -162,7 +162,7 @@ func testAllGenerated(t *testing.T, all interface{}) {
 				req = require.New(t)
 			)
 
-			req.NoError(provisioner.NewProvisioner(nil).Run(s.ProvisionRoles()))
+			req.NoError(runner.NewScenario(nil).Run(s.ProvisionRoles()))
 			req.NoError(s.TruncateRoles(ctx))
 		})
 
@@ -179,7 +179,7 @@ func testAllGenerated(t *testing.T, all interface{}) {
 				req = require.New(t)
 			)
 
-			req.NoError(provisioner.NewProvisioner(nil).Run(s.ProvisionSettings()))
+			req.NoError(runner.NewScenario(nil).Run(s.ProvisionSettings()))
 			req.NoError(s.TruncateSettings(ctx))
 		})
 
@@ -196,7 +196,7 @@ func testAllGenerated(t *testing.T, all interface{}) {
 				req = require.New(t)
 			)
 
-			req.NoError(provisioner.NewProvisioner(nil).Run(s.ProvisionAttachments()))
+			req.NoError(runner.NewScenario(nil).Run(s.ProvisionAttachments()))
 			req.NoError(s.TruncateAttachments(ctx))
 		})
 
@@ -213,7 +213,7 @@ func testAllGenerated(t *testing.T, all interface{}) {
 				req = require.New(t)
 			)
 
-			req.NoError(provisioner.NewProvisioner(nil).Run(s.ProvisionUsers()))
+			req.NoError(runner.NewScenario(nil).Run(s.ProvisionUsers()))
 			req.NoError(s.TruncateUsers(ctx))
 		})
 

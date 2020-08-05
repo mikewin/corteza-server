@@ -11,7 +11,7 @@ package store
 import (
 	"context"
 	"github.com/cortezaproject/corteza-server/compose/types"
-	"github.com/cortezaproject/corteza-server/store/provisioner"
+	"github.com/cortezaproject/corteza-server/pkg/scenario"
 )
 
 type (
@@ -29,6 +29,6 @@ type (
 
 	ComposeNamespacesProvisioned interface {
 		ComposeNamespaces
-		ProvisionComposeNamespaces() provisioner.Executor
+		ProvisionComposeNamespaces() scenario.Executor
 	}
 )

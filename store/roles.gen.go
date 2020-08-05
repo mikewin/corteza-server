@@ -10,7 +10,7 @@ package store
 
 import (
 	"context"
-	"github.com/cortezaproject/corteza-server/store/provisioner"
+	"github.com/cortezaproject/corteza-server/pkg/scenario"
 	"github.com/cortezaproject/corteza-server/system/types"
 )
 
@@ -31,6 +31,6 @@ type (
 
 	RolesProvisioned interface {
 		Roles
-		ProvisionRoles() provisioner.Executor
+		ProvisionRoles() scenario.Executor
 	}
 )

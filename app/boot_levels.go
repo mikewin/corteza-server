@@ -17,10 +17,10 @@ import (
 	"github.com/cortezaproject/corteza-server/pkg/logger"
 	"github.com/cortezaproject/corteza-server/pkg/mail"
 	"github.com/cortezaproject/corteza-server/pkg/monitor"
+	"github.com/cortezaproject/corteza-server/pkg/scenario"
 	"github.com/cortezaproject/corteza-server/pkg/scheduler"
 	"github.com/cortezaproject/corteza-server/pkg/sentry"
 	"github.com/cortezaproject/corteza-server/store/mysql"
-	"github.com/cortezaproject/corteza-server/store/provisioner"
 	"github.com/cortezaproject/corteza-server/system/auth/external"
 	sysService "github.com/cortezaproject/corteza-server/system/service"
 	sysEvent "github.com/cortezaproject/corteza-server/system/service/event"
@@ -108,13 +108,12 @@ func (app *CortezaApp) InitStore(ctx context.Context) error {
 		return err
 	}
 
-	// @todo provisioner => upgrader
 	// @todo store provision => store upgrade
 	ctx = actionlog.RequestOriginToContext(ctx, actionlog.RequestOrigin_APP_Upgrade)
 
-	err = provisioner.
-		NewProvisioner(func(_ int, msg string) { app.Log.Debug(strings.TrimSpace(msg)) }).
-		Run(s.Provision())
+	err = scenario.
+		NewScenario(func(_ int, msg string) { app.Log.Debug(strings.TrimSpace(msg)) }).
+		Play(s.Provision())
 
 	if err != nil {
 		return err

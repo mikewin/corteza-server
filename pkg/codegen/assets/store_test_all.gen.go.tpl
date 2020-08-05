@@ -9,7 +9,7 @@ package test_store
 import (
 	"context"
 	"github.com/cortezaproject/corteza-server/store"
-	"github.com/cortezaproject/corteza-server/store/provisioner"
+	"github.com/cortezaproject/corteza-server/pkg/scenario"
 	"github.com/stretchr/testify/require"
 	"testing"
 )
@@ -26,7 +26,7 @@ func testAllGenerated(t *testing.T, all interface{}) {
 				req = require.New(t)
 			)
 
-			req.NoError(provisioner.NewProvisioner(nil).Run(s.Provision{{ pubIdent .Types.Plural }}()))
+			req.NoError(scenario.NewScenario(nil).Run(s.Provision{{ pubIdent .Types.Plural }}()))
 			req.NoError(s.Truncate{{ pubIdent .Types.Plural }}(ctx))
 		})
 

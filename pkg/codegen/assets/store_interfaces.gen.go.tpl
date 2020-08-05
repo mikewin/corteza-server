@@ -10,7 +10,7 @@ package store
 
 import (
 	"context"
-	"github.com/cortezaproject/corteza-server/store/provisioner"
+	"github.com/cortezaproject/corteza-server/pkg/scenario"
 {{- range .Import }}
 	{{ normalizeImport . }}
 {{- end }}
@@ -39,6 +39,6 @@ type (
 
 	{{ pubIdent .Types.Plural }}Provisioned interface {
 		{{ pubIdent .Types.Plural }}
-		Provision{{ pubIdent $Types.Plural }}() provisioner.Executor
+		Provision{{ pubIdent $Types.Plural }}() scenario.Executor
 	}
 )

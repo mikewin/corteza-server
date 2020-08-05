@@ -1,9 +1,11 @@
 package mysql
 
-import "github.com/cortezaproject/corteza-server/store/provisioner"
+import (
+	. "github.com/cortezaproject/corteza-server/pkg/scenario"
+)
 
-func (s *Store) ProvisionCompose() provisioner.Executor {
-	return provisioner.Do(
+func (s *Store) ProvisionCompose() Executor {
+	return Do(
 		s.ProvisionComposeNamespaces(),
 		s.ProvisionComposePages(),
 		s.ProvisionComposeCharts(),
@@ -15,75 +17,75 @@ func (s *Store) ProvisionCompose() provisioner.Executor {
 	)
 }
 
-func (s *Store) ProvisionComposeNamespaces() provisioner.Executor {
+func (s *Store) ProvisionComposeNamespaces() Executor {
 	sp := &storeProvision{s}
 
-	return provisioner.Do(
+	return Do(
 		sp.createTable(s.ComposeNamespaceTableDef()),
 	)
 }
 
-func (s *Store) ProvisionComposePages() provisioner.Executor {
+func (s *Store) ProvisionComposePages() Executor {
 	sp := &storeProvision{s}
 
-	return provisioner.Do(
+	return Do(
 		sp.createTable(s.ComposePageTableDef()),
 	)
 }
 
-func (s *Store) ProvisionComposeCharts() provisioner.Executor {
+func (s *Store) ProvisionComposeCharts() Executor {
 	sp := &storeProvision{s}
 
-	return provisioner.Do(
+	return Do(
 		sp.createTable(s.ComposeChartTableDef()),
 	)
 }
 
-func (s *Store) ProvisionComposeModules() provisioner.Executor {
+func (s *Store) ProvisionComposeModules() Executor {
 	sp := &storeProvision{s}
 
-	return provisioner.Do(
+	return Do(
 		sp.createTable(s.ComposeModuleTableDef()),
 	)
 }
 
-func (s *Store) ProvisionComposeModuleFields() provisioner.Executor {
+func (s *Store) ProvisionComposeModuleFields() Executor {
 	sp := &storeProvision{s}
 
-	return provisioner.Do(
+	return Do(
 		sp.createTable(s.ComposeModuleFieldTableDef()),
 	)
 }
 
-func (s *Store) ProvisionComposeRecords() provisioner.Executor {
+func (s *Store) ProvisionComposeRecords() Executor {
 	sp := &storeProvision{s}
 
-	return provisioner.Do(
+	return Do(
 		sp.createTable(s.ComposeRecordTableDef()),
 		sp.createTable(s.ComposeRecordValueTableDef()),
 	)
 }
 
-func (s *Store) ProvisionComposePermissionRules() provisioner.Executor {
+func (s *Store) ProvisionComposePermissionRules() Executor {
 	sp := &storeProvision{s}
 
-	return provisioner.Do(
+	return Do(
 		sp.createTable(s.ComposeSettingsTableDef()),
 	)
 }
 
-func (s *Store) ProvisionComposeSettings() provisioner.Executor {
+func (s *Store) ProvisionComposeSettings() Executor {
 	sp := &storeProvision{s}
 
-	return provisioner.Do(
+	return Do(
 		sp.createTable(s.ComposeSettingsTableDef()),
 	)
 }
 
-func (s *Store) ProvisionComposeAttachment() provisioner.Executor {
+func (s *Store) ProvisionComposeAttachment() Executor {
 	sp := &storeProvision{s}
 
-	return provisioner.Do(
+	return Do(
 		sp.createTable(s.ComposeAttachmentTableDef()),
 	)
 }

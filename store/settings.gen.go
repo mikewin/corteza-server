@@ -10,8 +10,8 @@ package store
 
 import (
 	"context"
+	"github.com/cortezaproject/corteza-server/pkg/scenario"
 	"github.com/cortezaproject/corteza-server/pkg/settings"
-	"github.com/cortezaproject/corteza-server/store/provisioner"
 )
 
 type (
@@ -29,6 +29,6 @@ type (
 
 	SettingsProvisioned interface {
 		Settings
-		ProvisionSettings() provisioner.Executor
+		ProvisionSettings() scenario.Executor
 	}
 )

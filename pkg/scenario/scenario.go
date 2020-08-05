@@ -1,41 +1,42 @@
-package provisioner
+package scenario
 
-// Provisioner and
+// Scenario and
 
 import (
 	"fmt"
 )
 
 type (
-	Tester   func(s *Provisioner) (bool, error)
-	Executor func(s *Provisioner) error
-	Printer  func(int, string)
+	Tester   func(s *Scenario) (bool, error)
+	Executor func(s *Scenario) error
+	Logger   func(int, string)
 
-	Provisioner struct {
+	Scenario struct {
 		level int
-		print Printer
+		print Logger
 	}
 )
 
-func NewProvisioner(p Printer) *Provisioner {
-	return &Provisioner{
+func NewScenario(p Logger) *Scenario {
+	return &Scenario{
 		level: -1,
 		print: p,
 	}
 }
 
 // Log prints with an indentation
-func (s *Provisioner) Log(msg string, a ...interface{}) {
+func (s *Scenario) Log(msg string, a ...interface{}) {
 	if s.print != nil {
 		s.print(s.level, fmt.Sprintf(msg, a...))
 	}
 }
 
-func (s *Provisioner) Run(ee ...Executor) error {
-	return s.run(ee...)
+// Play runs provided
+func (s *Scenario) Play(ee ...Executor) error {
+	return s.play(ee...)
 }
 
-func (s *Provisioner) run(ee ...Executor) error {
+func (s *Scenario) play(ee ...Executor) error {
 	for _, e := range ee {
 		if e == nil {
 			continue
@@ -57,7 +58,7 @@ func If(v Tester, onTrue Executor) Executor {
 
 // IfElse executes onTrue if Tester pases, otherwise it executes onFalse
 func IfElse(v Tester, onTrue Executor, onFalse Executor) Executor {
-	return func(s *Provisioner) error {
+	return func(s *Scenario) error {
 		if ok, err := v(s); err != nil {
 			return err
 		} else if ok && onTrue != nil {
@@ -72,7 +73,7 @@ func IfElse(v Tester, onTrue Executor, onFalse Executor) Executor {
 
 // And returns verifier that returns true if all verifiers return true
 func And(vv ...Tester) Tester {
-	return func(s *Provisioner) (bool, error) {
+	return func(s *Scenario) (bool, error) {
 		for _, v := range vv {
 			if v == nil {
 				continue
@@ -89,7 +90,7 @@ func And(vv ...Tester) Tester {
 
 // Or returns verifier that returns first true or error
 func Or(vv ...Tester) Tester {
-	return func(s *Provisioner) (bool, error) {
+	return func(s *Scenario) (bool, error) {
 		for _, v := range vv {
 			if v == nil {
 				continue
@@ -104,23 +105,23 @@ func Or(vv ...Tester) Tester {
 	}
 }
 
-func Label(label string) Executor {
-	return func(s *Provisioner) error {
+func Log(label string) Executor {
+	return func(s *Scenario) error {
 		s.Log(label + "\n")
 		return nil
 	}
 }
 
 func Do(ee ...Executor) Executor {
-	return func(s *Provisioner) error {
+	return func(s *Scenario) error {
 		s.level++
 		defer func() { s.level-- }()
-		return s.run(ee...)
+		return s.play(ee...)
 	}
 }
 
 func Not(ee Tester) Tester {
-	return func(s *Provisioner) (bool, error) {
+	return func(s *Scenario) (bool, error) {
 		if r, err := ee(s); err != nil {
 			return r, err
 		} else {

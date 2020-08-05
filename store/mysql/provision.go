@@ -5,7 +5,7 @@ package mysql
 
 import (
 	"fmt"
-	. "github.com/cortezaproject/corteza-server/store/provisioner"
+	. "github.com/cortezaproject/corteza-server/pkg/scenario"
 	"github.com/cortezaproject/corteza-server/store/rdbms/schema"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -40,10 +40,10 @@ func (s storeProvision) createTable(def *schema.Table, ifFalse ...Executor) Exec
 	var mysqlMaker = NewMysqlTableCreator(def)
 
 	return Do(
-		Label("provisioning mysql database table "+def.Name),
+		Log("provisioning mysql database table "+def.Name),
 		IfElse(
 			s.tableMissing(def.Name),
-			Do(s.execSql(mysqlMaker.Make()...), Label("created\n")),
+			Do(s.execSql(mysqlMaker.Make()...), Log("created\n")),
 			Do(ifFalse...),
 		),
 	)
@@ -52,7 +52,7 @@ func (s storeProvision) createTable(def *schema.Table, ifFalse ...Executor) Exec
 // Returns Tester fn that will
 // verify if table is present or missing
 func (s storeProvision) tableMissing(table string) Tester {
-	return func(p *Provisioner) (bool, error) {
+	return func(p *Scenario) (bool, error) {
 		// @todo implement
 		var count int
 		if err := s.DB().Get(&count, sqlTableExists, s.Config().DBName, table); err != nil {
@@ -65,7 +65,7 @@ func (s storeProvision) tableMissing(table string) Tester {
 
 // Returns Executor fn that removes column (if exists) from a table
 func (s storeProvision) dropColumn(table, column string) Executor {
-	return func(p *Provisioner) error {
+	return func(p *Scenario) error {
 		if tt, err := s.getTableColumns(table); err != nil || s.getColumn(tt, column) == nil {
 			return err
 		}
@@ -81,7 +81,7 @@ func (s storeProvision) dropColumn(table, column string) Executor {
 
 // Returns Executor fn that adds column
 func (s storeProvision) addColumn(table, column, spec string) Executor {
-	return func(p *Provisioner) error {
+	return func(p *Scenario) error {
 		if tt, err := s.getTableColumns(table); err != nil || s.getColumn(tt, column) != nil {
 			return err
 		}
@@ -130,7 +130,7 @@ func (s storeProvision) rawSqlExec(ss ...string) error {
 
 // Returns Executor fn that calls rawSqlExec
 func (s storeProvision) execSql(ss ...string) Executor {
-	return func(p *Provisioner) error {
+	return func(p *Scenario) error {
 		return s.rawSqlExec(ss...)
 	}
 }

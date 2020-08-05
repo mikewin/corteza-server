@@ -1,0 +1,27 @@
+= Description
+
+Package `scenario` provides set of functions that can be used for encapsulating set of instructions that need to be executed.
+
+.Example
+[source,go]
+----
+import (
+	. "github.com/cortezaproject/corteza-server/pkg/scenario"
+)
+
+scene := Do(
+	Log("something important that needs to be logged"),
+    IfElse(
+        func (p *Scenario) (bool, error) {
+        	// test condition
+        	return true, nil,
+        },
+        func (p *Scenario) error, {
+        	// execute if condition is true
+        },
+        func (p *Scenario) error, {
+        	// execute if condition is false
+        },
+    )
+)
+----

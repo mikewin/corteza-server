@@ -1,9 +1,11 @@
 package mysql
 
-import "github.com/cortezaproject/corteza-server/store/provisioner"
+import (
+	. "github.com/cortezaproject/corteza-server/pkg/scenario"
+)
 
-func (s *Store) ProvisionCore() provisioner.Executor {
-	return provisioner.Do(
+func (s *Store) ProvisionCore() Executor {
+	return Do(
 		s.ProvisionUsers(),
 		s.ProvisionActionLog(),
 		s.ProvisionPermissionRules(),
@@ -14,31 +16,31 @@ func (s *Store) ProvisionCore() provisioner.Executor {
 	)
 }
 
-func (s *Store) ProvisionActionLog() provisioner.Executor {
+func (s *Store) ProvisionActionLog() Executor {
 	return (&storeProvision{s}).createTable(
 		s.ActionLogTableDef(),
 	)
 }
 
-func (s *Store) ProvisionPermissionRules() provisioner.Executor {
+func (s *Store) ProvisionPermissionRules() Executor {
 	return (&storeProvision{s}).createTable(
 		s.PermissionRulesTableDef(),
 	)
 }
 
-func (s *Store) ProvisionSettings() provisioner.Executor {
+func (s *Store) ProvisionSettings() Executor {
 	return (&storeProvision{s}).createTable(
 		s.SettingsTableDef(),
 	)
 }
 
-func (s *Store) ProvisionAttachments() provisioner.Executor {
+func (s *Store) ProvisionAttachments() Executor {
 	return (&storeProvision{s}).createTable(
 		s.AttachmentsTableDef(),
 	)
 }
 
-func (s *Store) ProvisionUsers() provisioner.Executor {
+func (s *Store) ProvisionUsers() Executor {
 	return (&storeProvision{s}).createTable(
 		s.UsersTableDef(),
 	//dropColumn(sysUser, "rel_organisation"),
@@ -49,25 +51,25 @@ func (s *Store) ProvisionUsers() provisioner.Executor {
 	)
 }
 
-func (s *Store) ProvisionCredentials() provisioner.Executor {
+func (s *Store) ProvisionCredentials() Executor {
 	return (&storeProvision{s}).createTable(
 		s.CredentialsTableDef(),
 	)
 }
 
-func (s *Store) ProvisionRoles() provisioner.Executor {
+func (s *Store) ProvisionRoles() Executor {
 	return (&storeProvision{s}).createTable(
 		s.RolesTableDef(),
 	)
 }
 
-func (s *Store) ProvisionApplications() provisioner.Executor {
+func (s *Store) ProvisionApplications() Executor {
 	return (&storeProvision{s}).createTable(
 		s.ApplicationsTableDef(),
 	)
 }
 
-func (s *Store) ProvisionReminders() provisioner.Executor {
+func (s *Store) ProvisionReminders() Executor {
 	return (&storeProvision{s}).createTable(
 		s.RemindersTableDef(),
 	)

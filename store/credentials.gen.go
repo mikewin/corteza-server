@@ -10,7 +10,7 @@ package store
 
 import (
 	"context"
-	"github.com/cortezaproject/corteza-server/store/provisioner"
+	"github.com/cortezaproject/corteza-server/pkg/scenario"
 	"github.com/cortezaproject/corteza-server/system/types"
 )
 
@@ -29,6 +29,6 @@ type (
 
 	CredentialsProvisioned interface {
 		Credentials
-		ProvisionCredentials() provisioner.Executor
+		ProvisionCredentials() scenario.Executor
 	}
 )

@@ -3,7 +3,7 @@ package pgsql
 import (
 	"context"
 	"github.com/Masterminds/squirrel"
-	"github.com/cortezaproject/corteza-server/store/provisioner"
+	. "github.com/cortezaproject/corteza-server/pkg/scenario"
 	"github.com/cortezaproject/corteza-server/store/rdbms"
 	_ "github.com/lib/pq"
 	"net/url"
@@ -33,8 +33,8 @@ func New(ctx context.Context, dsn string) (s *Store, err error) {
 	return s, nil
 }
 
-func (s *Store) Provision() provisioner.Executor {
-	return provisioner.Do(
+func (s *Store) Provision() Executor {
+	return Do(
 		s.ProvisionCore(),
 		s.ProvisionCompose(),
 		s.ProvisionMessaging(),

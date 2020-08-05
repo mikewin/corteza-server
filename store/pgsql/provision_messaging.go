@@ -1,9 +1,9 @@
 package pgsql
 
-import "github.com/cortezaproject/corteza-server/store/provisioner"
+import . "github.com/cortezaproject/corteza-server/pkg/scenario"
 
-func (s *Store) ProvisionMessaging() provisioner.Executor {
-	return provisioner.Do(
+func (s *Store) ProvisionMessaging() Executor {
+	return Do(
 		s.ProvisionMessagingChannel(),
 		s.ProvisionMessagingMessage(),
 		s.ProvisionMessagingPermissionRules(),
@@ -11,19 +11,19 @@ func (s *Store) ProvisionMessaging() provisioner.Executor {
 	)
 }
 
-func (s *Store) ProvisionMessagingChannel() provisioner.Executor {
+func (s *Store) ProvisionMessagingChannel() Executor {
 	sp := &storeProvision{s}
 
-	return provisioner.Do(
+	return Do(
 		sp.createTable(s.MessagingChannelTableDef()),
 		sp.createTable(s.MessagingChannelMemberTableDef()),
 	)
 }
 
-func (s *Store) ProvisionMessagingMessage() provisioner.Executor {
+func (s *Store) ProvisionMessagingMessage() Executor {
 	sp := &storeProvision{s}
 
-	return provisioner.Do(
+	return Do(
 		sp.createTable(s.MessagingMessageTableDef()),
 		sp.createTable(s.MessagingMessageAttachmentTableDef()),
 		sp.createTable(s.MessagingMessageFlagTableDef()),
@@ -32,18 +32,18 @@ func (s *Store) ProvisionMessagingMessage() provisioner.Executor {
 	)
 }
 
-func (s *Store) ProvisionMessagingPermissionRules() provisioner.Executor {
+func (s *Store) ProvisionMessagingPermissionRules() Executor {
 	sp := &storeProvision{s}
 
-	return provisioner.Do(
+	return Do(
 		sp.createTable(s.MessagingSettingsTableDef()),
 	)
 }
 
-func (s *Store) ProvisionMessagingSettings() provisioner.Executor {
+func (s *Store) ProvisionMessagingSettings() Executor {
 	sp := &storeProvision{s}
 
-	return provisioner.Do(
+	return Do(
 		sp.createTable(s.MessagingSettingsTableDef()),
 	)
 }
