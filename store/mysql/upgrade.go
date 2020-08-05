@@ -21,7 +21,7 @@ type (
 		Extra   string  `db:"Extra"`
 	}
 
-	// storeUpgrade groups all Upgradeing functions
+	// storeUpgrade groups all Upgrading functions
 	storeUpgrade struct {
 		*Store
 	}
@@ -40,7 +40,7 @@ func (s storeUpgrade) createTable(def *schema.Table, ifFalse ...Executor) Execut
 	var mysqlMaker = NewMysqlTableCreator(def)
 
 	return Do(
-		Log("Upgradeing mysql database table "+def.Name),
+		Log("Upgrading mysql database table "+def.Name),
 		IfElse(
 			s.tableMissing(def.Name),
 			Do(s.execSql(mysqlMaker.Make()...), Log("created\n")),

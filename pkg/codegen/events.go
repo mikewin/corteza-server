@@ -100,7 +100,7 @@ func procEvents() ([]*eventsDef, error) {
 
 		for resName, evDef := range e {
 
-			d.Imports = make([]string, 0)
+			d.Imports = []string{fmt.Sprintf(importTypePathTpl, d.App)}
 			evDef.ResourceString = resName
 
 			if l := strings.Index(resName, ":"); l > 0 {

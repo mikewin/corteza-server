@@ -20,7 +20,7 @@ type (
 		Extra   string  `db:"Extra"`
 	}
 
-	// storeUpgrade groups all Upgradeing functions
+	// storeUpgrade groups all Upgrading functions
 	storeUpgrade struct {
 		*Store
 	}
@@ -39,7 +39,7 @@ func (s storeUpgrade) createTable(def *schema.Table, ifFalse ...Executor) Execut
 	var pgsqlMaker = NewPgsqlTableCreator(def)
 
 	return Do(
-		Log("Upgradeing postgres database table "+def.Name),
+		Log("Upgrading postgres database table "+def.Name),
 		IfElse(
 			s.tableMissing(def.Name),
 			Do(s.execSql(pgsqlMaker.Make()...), Log("created\n")),

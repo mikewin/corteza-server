@@ -1,6 +1,6 @@
 Goal
  - multi-repository (different DB) support
- - refactor old raw-sql migrations to logical and dynamic schema Upgradeing
+ - refactor old raw-sql migrations to logical and dynamic schema Upgrading
  - (tbd) consolidation of system & compose (& messaging) subsystems
 
 File system:
@@ -8,7 +8,7 @@ File system:
    /internal            Internal repository tools (pkg/ql, pgk/rh should be moved here)
  /<implementation>      Individual core repository implementation
                         [mysql|postgresql|redis|memory|sqlite|elasticsearch|mongo]
-   /schema              Schema Upgradeing for individual repository implementation
+   /schema              Schema Upgrading for individual repository implementation
 
 
 

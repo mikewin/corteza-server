@@ -11,7 +11,7 @@ package {{ .Package }}
 import (
 	"encoding/json"
 {{- range $i, $import := .Imports }}
-  "{{ $import }}"
+  {{ normalizeImport $import }}
 {{- end }}
 )
 
